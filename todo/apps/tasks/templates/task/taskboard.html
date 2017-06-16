@@ -1,0 +1,137 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block style %}
+<!-- Bootstrap -->
+<link href="{% static "css/taskboard.css" %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="col-md-12">
+          <div id="todo" class="col-md-4">
+              <div class="panel panel-primary">
+                  <div class="panel-heading">
+                    <h3 class="panel-title">
+                        To Do
+                    </h3>
+                  </div>
+
+                  <div class="panel-body">
+                      <div class="input-group">
+                          <input type="text" class="form-control" id="task-name" placeholder="Nova Tarefa">
+                          <span class="input-group-btn">
+                            <button class="btn btn-default" type="button" id="save-task">
+                                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                            </button>
+                          </span>
+                        </div>
+                      <ul class="list-group todo" data-status="A">
+
+                          {% for item in view.todo %}
+                          <li class="list-group-item" data-name="{{ item.name }}" data-id="{{ item.pk }}">
+
+                              <div class="hide edit-form-task-{{ item.pk }}">
+                                <div class="input-group">
+                                    <input type="text" value="{{ item.name }}" class="form-control form-name-{{ item.pk }}">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-success update-task" type="button" data-id="{{ item.pk }}">
+                                            <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                                        </button>
+                                    </span>
+                                </div>
+                              </div>
+
+                              <div class="item-task-{{ item.pk }}">
+                                  <span class="glyphicon glyphicon-move" ></span>
+                                  <span class="task-name-{{ item.pk }}">{{ item.name }}</span>
+                                  <button class="pull-right delete-task" data-id="{{ item.pk }}"><span class="glyphicon glyphicon-trash" ></span></button>
+                                  <button class="pull-right edit-task" data-id="{{ item.pk }}"><span class="glyphicon glyphicon-pencil" ></span></button>
+                              </div>
+
+                          </li>
+                          {% endfor %}
+
+                      </ul>
+                  </div>
+              </div>
+
+          </div>
+          <div id="doing" class="col-md-4">
+              <div class="panel panel-info">
+                  <div class="panel-heading">
+                      <h3 class="panel-title">Doing</h3>
+                  </div>
+                  <div class="panel-body">
+                      <ul class="list-group" data-status="E">
+                          {% for item in view.doing %}
+                          <li class="list-group-item" data-name="{{ item.name }}" data-id="{{ item.pk }}">
+
+                              <div class="hide edit-form-task-{{ item.pk }}">
+                                <div class="input-group">
+                                    <input type="text" value="{{ item.name }}" class="form-control form-name-{{ item.pk }}">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-success update-task" type="button" data-id="{{ item.pk }}">
+                                            <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                                        </button>
+                                    </span>
+                                </div>
+                              </div>
+
+                              <div class="item-task-{{ item.pk }}">
+                                  <span class="glyphicon glyphicon-move" ></span>
+                                  <span class="task-name-{{ item.pk }}">{{ item.name }}</span>
+                                  <button class="pull-right delete-task" data-id="{{ item.pk }}"><span class="glyphicon glyphicon-trash" ></span></button>
+                                  <button class="pull-right edit-task" data-id="{{ item.pk }}"><span class="glyphicon glyphicon-pencil" ></span></button>
+                              </div>
+
+                          </li>
+                          {% endfor %}
+                      </ul>
+                  </div>
+              </div>
+          </div>
+          <div id="done" class="col-md-4">
+              <div class="panel panel-success">
+                  <div class="panel-heading">
+                      <h3 class="panel-title">Done</h3>
+                  </div>
+                  <div class="panel-body">
+                      <ul class="list-group" data-status="F">
+                          {% for item in view.done %}
+                          <li class="list-group-item" data-name="{{ item.name }}" data-id="{{ item.pk }}">
+
+                              <div class="hide edit-form-task-{{ item.pk }}">
+                                <div class="input-group">
+                                    <input type="text" value="{{ item.name }}" class="form-control form-name-{{ item.pk }}">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-success update-task" type="button" data-id="{{ item.pk }}">
+                                            <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                                        </button>
+                                    </span>
+                                </div>
+                              </div>
+
+                              <div class="item-task-{{ item.pk }}">
+                                  <span class="glyphicon glyphicon-move" ></span>
+                                  <span class="task-name-{{ item.pk }}">{{ item.name }}</span>
+                                  <button class="pull-right delete-task" data-id="{{ item.pk }}"><span class="glyphicon glyphicon-trash" ></span></button>
+                                  <button class="pull-right edit-task" data-id="{{ item.pk }}"><span class="glyphicon glyphicon-pencil" ></span></button>
+                              </div>
+
+                          </li>
+                          {% endfor %}
+                      </ul>
+                  </div>
+              </div>
+          </div>
+      </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static "js/jquery-sortable.js" %}"></script>
+<script src="{% static "js/ajax-setup.js" %}"></script>
+<script src="{% static "js/taskboard-form.js" %}"></script>
+<script src="{% static "js/tasks-dragdrop.js" %}"></script>
+{% endblock %}
