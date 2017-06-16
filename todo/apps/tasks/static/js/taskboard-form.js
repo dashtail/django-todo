@@ -1,11 +1,12 @@
 $(document).ready(function (){
+    var csrftoken = $('input[name=csrfmiddlewaretoken]').val();
     //Save the task on ToDo List
     $('#save-task').click(function (){
         var name = $('#task-name').val();
         $.ajax({
             url: '/',
             method: 'POST',
-            data: {name: name},
+            data: {name: name, csrfmiddlewaretoken:csrftoken},
             success: function (pk){
                 $('.todo').prepend('<li class="list-group-item" data-name="'+ name +
                 '" data-id="'+pk+'"><span class="glyphicon glyphicon-move" ></span> ' +
@@ -32,7 +33,7 @@ $(document).ready(function (){
         $.ajax({
             url: '/update/',
             type: 'POST',
-            data: {pk: pk, name: name },
+            data: {pk: pk, name: name, csrfmiddlewaretoken:csrftoken },
             success: function(){
                 $('.edit-form-task-'+pk).addClass('hide');
                 $('.item-task-'+pk).removeClass('hide');
@@ -47,7 +48,7 @@ $(document).ready(function (){
         $.ajax({
             url: '/delete/',
             type: 'POST',
-            data: {pk: pk},
+            data: {pk: pk, csrfmiddlewaretoken:csrftoken},
             success: function(){
                 $("ul").find("[data-id='" + pk + "']").remove();
             }

@@ -16,8 +16,8 @@
                         To Do
                     </h3>
                   </div>
-
                   <div class="panel-body">
+                      <form method="post">{% csrf_token %}
                       <div class="input-group">
                           <input type="text" class="form-control" id="task-name" placeholder="Nova Tarefa">
                           <span class="input-group-btn">
@@ -26,6 +26,7 @@
                             </button>
                           </span>
                         </div>
+                        </form>
                       <ul class="list-group todo" data-status="A">
 
                           {% for item in view.todo %}

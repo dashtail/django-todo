@@ -1,4 +1,5 @@
 $(document).ready(function(){
+    var csrftoken = $('input[name=csrfmiddlewaretoken]').val();
     //drag and drop
     $("ul.list-group").sortable({
       group: 'no-drop',
@@ -29,7 +30,7 @@ $(document).ready(function(){
             url:'/reorder/',
             dataType: 'json',
             method: 'POST',
-            data: {tasks_list, status:status}
+            data: {tasks_list: tasks_list, status:status, csrfmiddlewaretoken:csrftoken}
         });
 
       },
