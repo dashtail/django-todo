@@ -17,7 +17,7 @@
                     </h3>
                   </div>
                   <div class="panel-body">
-                      <form method="post">{% csrf_token %}
+                      {% csrf_token %}
                       <div class="input-group">
                           <input type="text" class="form-control" id="task-name" placeholder="Nova Tarefa">
                           <span class="input-group-btn">
@@ -26,7 +26,6 @@
                             </button>
                           </span>
                         </div>
-                        </form>
                       <ul class="list-group todo" data-status="A">
 
                           {% for item in view.todo %}
@@ -132,7 +131,6 @@
 
 {% block scripts %}
 <script src="{% static "js/jquery-sortable.js" %}"></script>
-<script src="{% static "js/ajax-setup.js" %}"></script>
 <script src="{% static "js/taskboard-form.js" %}"></script>
 <script src="{% static "js/tasks-dragdrop.js" %}"></script>
 {% endblock %}
